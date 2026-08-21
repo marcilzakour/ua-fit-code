@@ -6,3 +6,34 @@ dist/
 .venv/
 .DS_Store
 *.log
+
+# Datasets (bring your own multi-view WebDataset shards).
+/data
+
+# Checkpoints (download separately; see checkpoints/README.md).
+/checkpoints/*
+!/checkpoints/README.md
+
+# MANO model files are license-restricted and NOT redistributed here.
+# Download from https://mano.is.tue.mpg.de/ and place under assets/mano_v1_2/models/.
+assets/**/*.pkl
+*.pth
+*.pth.tar
+
+# Training scratch / artifacts
+/exp
+/occ_annotations
+/runs
+configs/_*.yaml
+wandb/
+
+# Training code withheld until the training release (kept locally, not published).
+scripts/train.py
+TRAIN.md
+configs/uafit_stageA.yaml
+configs/uafit_stageB.yaml
+configs/uafit_stage_unc.yaml
+configs/uafit_stage_fit.yaml
+configs/uafit_stage_betabone.yaml
+# Internal reproduction findings (ships with the training release).
+REPRO_ARCTIC_DIAGNOSIS.md

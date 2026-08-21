@@ -1,0 +1,399 @@
+TRAIN:
+  MANUAL_SEED: 1
+  CONV_REPEATABLE: true
+  BATCH_SIZE: 16
+  EPOCH: 8
+  OPTIMIZER: adam
+  LR: 5.0e-05
+  SCHEDULER: StepLR
+  LR_DECAY_GAMMA: 0.1
+  LR_DECAY_STEP:
+  - 5
+  - 7
+  LOG_INTERVAL: 20
+  FIND_UNUSED_PARAMETERS: true
+  GRAD_CLIP_ENABLED: true
+  GRAD_CLIP:
+    TYPE: 2
+    NORM: 5.0
+  MIXED_PRECISION: true
+  LAUNCH_TENSORBOARD: true
+  AUTOSCALE_LR: true
+  VAL_BATCH_SIZE: 24
+  STATIC_GRAPH: false
+  WEIGHT_DECAY: 0.0001
+  BACKBONE_LR_SCALE: 0.1
+GPU_ID: 0
+DATASET:
+  TRAIN:
+    TYPE: MixWebDataset
+    DATASET_LIST:
+    - HO3D
+    - DEXYCB
+    - ARCTIC
+    - Interhand
+    - Oakink
+    EPOCH_SIZE: 24000
+    HO3D:
+      MIX_RATIO: 0.14
+      URLS: data/dataset_tars/HO3D_mv_crop512/HO3D_mv_train_crop512-{000000..000008}.tar
+      DATA_SPLIT: train
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 5
+      ANN_DIR: occ_annotations/v2
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: true
+        CENTER_JIT: 0.1
+        SCALE_JIT: 0.2
+        ROT_JIT: 30
+        COLOR_JIT: 0.4
+        ROT_PROB: 1.0
+        OCCLUSION: true
+        OCCLUSION_PROB: 0.4
+        CONTRAST_JIT: 0.4
+        SATURATION_JIT: 0.4
+        HUE_JIT: 0.05
+        GAMMA_JIT: 0.3
+        BLUR_PROB: 0.2
+        BLUR_SIGMA:
+        - 0.1
+        - 1.5
+        NOISE_PROB: 0.2
+        NOISE_STD: 8.0
+        GRAY_PROB: 0.1
+        JPEG_PROB: 0.2
+        JPEG_QUALITY:
+        - 40
+        - 95
+    DEXYCB:
+      MIX_RATIO: 0.16
+      URLS: data/dataset_tars/DexYCB_mv_crop512/DexYCB_mv_train_crop512-{000000..000019}.tar
+      DATA_SPLIT: train
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 8
+      ANN_DIR: occ_annotations/v2
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: true
+        CENTER_JIT: 0.1
+        SCALE_JIT: 0.2
+        ROT_JIT: 30
+        COLOR_JIT: 0.4
+        ROT_PROB: 1.0
+        OCCLUSION: true
+        OCCLUSION_PROB: 0.4
+        CONTRAST_JIT: 0.4
+        SATURATION_JIT: 0.4
+        HUE_JIT: 0.05
+        GAMMA_JIT: 0.3
+        BLUR_PROB: 0.2
+        BLUR_SIGMA:
+        - 0.1
+        - 1.5
+        NOISE_PROB: 0.2
+        NOISE_STD: 8.0
+        GRAY_PROB: 0.1
+        JPEG_PROB: 0.2
+        JPEG_QUALITY:
+        - 40
+        - 95
+    ARCTIC:
+      MIX_RATIO: 0.24
+      URLS: data/dataset_tars/Arctic_mv_crop768/Arctic_mv_train_crop768_p1-{000000..000360}.tar
+      DATA_SPLIT: train
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 8
+      ANN_DIR: occ_annotations/v2
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: true
+        CENTER_JIT: 0.1
+        SCALE_JIT: 0.2
+        ROT_JIT: 30
+        COLOR_JIT: 0.4
+        ROT_PROB: 1.0
+        OCCLUSION: true
+        OCCLUSION_PROB: 0.4
+        CONTRAST_JIT: 0.4
+        SATURATION_JIT: 0.4
+        HUE_JIT: 0.05
+        GAMMA_JIT: 0.3
+        BLUR_PROB: 0.2
+        BLUR_SIGMA:
+        - 0.1
+        - 1.5
+        NOISE_PROB: 0.2
+        NOISE_STD: 8.0
+        GRAY_PROB: 0.1
+        JPEG_PROB: 0.2
+        JPEG_QUALITY:
+        - 40
+        - 95
+    Interhand:
+      MIX_RATIO: 0.2
+      URLS: data/dataset_tars/Interhand_mv_crop512/Interhand_mv_train_crop512-{000000..000075}.tar
+      DATA_SPLIT: train
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 8
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: true
+        CENTER_JIT: 0.1
+        SCALE_JIT: 0.2
+        ROT_JIT: 30
+        COLOR_JIT: 0.4
+        ROT_PROB: 1.0
+        OCCLUSION: true
+        OCCLUSION_PROB: 0.4
+        CONTRAST_JIT: 0.4
+        SATURATION_JIT: 0.4
+        HUE_JIT: 0.05
+        GAMMA_JIT: 0.3
+        BLUR_PROB: 0.2
+        BLUR_SIGMA:
+        - 0.1
+        - 1.5
+        NOISE_PROB: 0.2
+        NOISE_STD: 8.0
+        GRAY_PROB: 0.1
+        JPEG_PROB: 0.2
+        JPEG_QUALITY:
+        - 40
+        - 95
+      ANN_DIR: occ_annotations/v2
+    Oakink:
+      MIX_RATIO: 0.16
+      URLS: data/dataset_tars/Oakink_mv_crop512/Oakink_mv_train_crop512+val-{000000..000103}.tar
+      DATA_SPLIT: train
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 4
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: true
+        CENTER_JIT: 0.1
+        SCALE_JIT: 0.2
+        ROT_JIT: 30
+        COLOR_JIT: 0.4
+        ROT_PROB: 1.0
+        OCCLUSION: true
+        OCCLUSION_PROB: 0.4
+        CONTRAST_JIT: 0.4
+        SATURATION_JIT: 0.4
+        HUE_JIT: 0.05
+        GAMMA_JIT: 0.3
+        BLUR_PROB: 0.2
+        BLUR_SIGMA:
+        - 0.1
+        - 1.5
+        NOISE_PROB: 0.2
+        NOISE_STD: 8.0
+        GRAY_PROB: 0.1
+        JPEG_PROB: 0.2
+        JPEG_QUALITY:
+        - 40
+        - 95
+      ANN_DIR: occ_annotations/v2
+    Freihand:
+      MIX_RATIO: 0.1
+      URLS: data/dataset_tars/Freihand_mv_crop512/Freihand_mv_train_crop512-{000000..000004}.tar
+      DATA_SPLIT: train
+      RANDOM_N_VIEWS: false
+      VIEW_RANGE:
+      - 1
+      - 1
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: true
+        CENTER_JIT: 0.1
+        SCALE_JIT: 0.2
+        ROT_JIT: 30
+        COLOR_JIT: 0.4
+        ROT_PROB: 1.0
+        OCCLUSION: true
+        OCCLUSION_PROB: 0.4
+        CONTRAST_JIT: 0.4
+        SATURATION_JIT: 0.4
+        HUE_JIT: 0.05
+        GAMMA_JIT: 0.3
+        BLUR_PROB: 0.2
+        BLUR_SIGMA:
+        - 0.1
+        - 1.5
+        NOISE_PROB: 0.2
+        NOISE_STD: 8.0
+        GRAY_PROB: 0.1
+        JPEG_PROB: 0.2
+        JPEG_QUALITY:
+        - 40
+        - 95
+      ANN_DIR: occ_annotations/v2
+  TEST:
+    TYPE: MixWebDataset
+    DATASET_LIST:
+    - HO3D_TEST
+    - DEXYCB_TEST
+    - ARCTIC_TEST
+    - INTERHAND_TEST
+    EPOCH_SIZE: 1200
+    HO3D_TEST:
+      DATA_SPLIT: test
+      EPOCH_SIZE: 300
+      MIX_RATIO: 0.18
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 2
+      URLS: data/dataset_tars/HO3D_mv_test/HO3D_mv_test-{000000..000002}.tar
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: false
+    DEXYCB_TEST:
+      DATA_SPLIT: test
+      EPOCH_SIZE: 300
+      MIX_RATIO: 0.18
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 2
+      URLS: data/dataset_tars/DexYCB_mv/DexYCB_mv_test-{000000..000003}.tar
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: false
+    ARCTIC_TEST:
+      DATA_SPLIT: test
+      EPOCH_SIZE: 300
+      MIX_RATIO: 0.18
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 2
+      URLS: data/dataset_tars/Arctic_mv/Arctic_mv_val_p1-{000000..000045}.tar
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: false
+    INTERHAND_TEST:
+      MIX_RATIO: 0.25
+      URLS: data/dataset_tars/Interhand_mv/Interhand_mv_val-{000000..000022}.tar
+      DATA_SPLIT: val
+      EPOCH_SIZE: 300
+      RANDOM_N_VIEWS: true
+      VIEW_RANGE:
+      - 2
+      - 2
+      TRANSFORM:
+        TYPE: SimpleTransform3DMultiView
+        AUG: false
+LOGGING:
+  BACKEND: both
+  PROJECT: poem-dovf
+DATA_PRESET:
+  BBOX_EXPAND_RATIO: 2.0
+  CENTER_IDX: 0
+  HEATMAP_SIGMA: 2.0
+  HEATMAP_SIZE:
+  - 64
+  - 64
+  IMAGE_SIZE:
+  - 256
+  - 256
+  NUM_JOINTS: 21
+  NUM_VERTS: 778
+  USE_CACHE: true
+  WITH_HEATMAP: false
+  WITH_MASK: false
+MODEL:
+  TYPE: DOVFManoMVEpi
+  PRETRAINED: ''
+  PRETRAIN_2D: false
+  CHANNELS_LAST: true
+  HEATMAP_SIZE:
+  - 64
+  - 64
+  FEAT_DIM: 128
+  HEATMAP_TARGET: joints
+  DOVF_TARGET: joints
+  BACKEND: theseus
+  FITTER: analytic
+  DEEP_SUPERVISION: true
+  HEATMAP_LOSS: mse
+  VIZ_ENABLED: true
+  VIZ_INTERVAL: 250
+  BACKBONE:
+    TYPE: HRNet
+    PRETRAINED: ''
+    FREEZE_BATCHNORM: true
+  OPTIMIZER_DOVF:
+    MIN_VIEWS: 2
+    MAX_VIEWS: 8
+    ITERS: 8
+    STEP_SIZE: 0.5
+    PRIOR_TYPE: pca
+    PRIOR_WEIGHT: 0.01
+    ANCHOR_WEIGHT: 0.05
+    CONF_WEIGHT: true
+    LOSS_RADIUS_INIT: 3.0
+    JAC_MODE: analytic
+    JAC_MODE_EVAL: analytic
+    BACKWARD: implicit
+  LOSS:
+    HEATMAP_WEIGHT: 10.0
+    DOVF_WEIGHT: 1.0
+    DOVF_DEEP_WEIGHT: 0.25
+    CONSENSUS_2D_WEIGHT: 1.0
+    JOINTS_3D_WEIGHT: 0.0
+    VERTS_3D_WEIGHT: 0.0
+    INIT_JOINTS_3D_WEIGHT: 10.0
+    POSE_REG_WEIGHT: 0.001
+    BETAS_REG_WEIGHT: 0.0005
+    UNC_NLL_WEIGHT: 1.0
+    J3D_MEAN_WEIGHT: 10.0
+    MU3D_DEEPSUP_WEIGHT: 10.0
+    J3D_NLL_WEIGHT: 0.0
+    VOTE_NLL_WEIGHT: 1.0
+    GATE_REG_WEIGHT: 0.0
+    BIDIR_WEIGHT: 0.0
+    BEAM_CE_WEIGHT: 0.0
+    CORR_WEIGHT: 0.2
+    FIT_JOINTS_WEIGHT: 10.0
+    BETA_WEIGHT: 1.0
+    BETA_DIM_SCALED: true
+  INIT_FROM: ''
+  WARMUP_EPOCHS: 0
+  RAMP_EPOCHS: 1
+  UNC:
+    XVIEW_GATE: false
+    XVIEW_DIM: 256
+    XVIEW_LAYERS: 3
+    XVIEW_HEADS: 8
+    BACKWARD: implicit
+    LR_SCALE: 1.0
+    REFINE: false
+    PREDICT_J3D: false
+    MC_HEAD: false
+    PREDICTOR_ONLY: true
+    MC_PARTICLES: 16
+  EPI:
+    T: 0
+    POSE_REFINE: true
+    POSE_DIM: 256
+    POSE_HEADS: 8
+    POSE_LAYERS: 4
+    POSE_ITERS: 2
+    POSE_MAXCORR: 0.05
+    DESC_DIM: 64
+    FIT_IN_LOOP: true
+    BETA_HEAD: true
+    BETA_BONE_FEAT: true
+    BETA_BONE_ONLY: false
+    BETA_TRAIN_ONLY: true

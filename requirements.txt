@@ -1,0 +1,17 @@
+# Core runtime for UA-Fit evaluation.
+#
+# torch and pytorch3d are platform/CUDA specific: install them first following
+# the official instructions for your machine, then `pip install -r requirements.txt`
+# for the rest. Tested with torch 2.9 / CUDA 12.8 on an NVIDIA H200.
+numpy>=1.23
+scipy>=1.10
+webdataset>=0.2
+PyYAML>=6.0
+yacs>=0.1.8
+termcolor>=2.0
+# MANO layer (no PyPI release):
+#   pip install "git+https://github.com/lixiny/manotorch.git"
+# torch (install for your platform first):
+#   see https://pytorch.org/get-started/locally/
+# pytorch3d (only matrix_to_axis_angle is used; install for your platform):
+#   see https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md
